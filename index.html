@@ -842,14 +842,14 @@
             </div>
             
             <div class="donation-options">
-                <button class="donation-amount" onclick="selectAmount(50)">$50</button>
-                <button class="donation-amount" onclick="selectAmount(100)">$100</button>
-                <button class="donation-amount selected" onclick="selectAmount(250)">$250</button>
-                <button class="donation-amount" onclick="selectAmount(500)">$500</button>
+                <button class="donation-amount" onclick="selectAmountWithStripe(50)">$50</button>
+                <button class="donation-amount" onclick="selectAmountWithStripe(100)">$100</button>
+                <button class="donation-amount selected" onclick="selectAmountWithStripe(250)">$250</button>
+                <button class="donation-amount" onclick="selectAmountWithStripe(500)">$500</button>
                 <input type="number" class="custom-amount" placeholder="Other" id="customAmount">
             </div>
             
-            <button class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 3rem;">
+            <button class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 3rem;" onclick="processMainDonation()">
                 Support Now 🚀
             </button>
             
@@ -1085,6 +1085,36 @@
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
+        }
+
+        // Payment Configuration
+        const PAYMENT_CONFIG = {
+            stripe: {
+                paymentLinks: {
+                    50: 'https://buy.stripe.com/bII5kF1Ty3SR7rW3QF',
+                    100: 'https://buy.stripe.com/fZe28t3b61KJeCacMQ',
+                    250: 'https://buy.stripe.com/eVa6oJbtJ31R3fqfQS',
+                    500: 'https://buy.stripe.com/eVa3cxbOIFYcL9mdQV'
+                }
+            }
+        };
+
+        function processMainDonation() {
+            const amount = selectedAmount || 250; // Default to $250 if none selected
+            const paymentLink = PAYMENT_CONFIG.stripe.paymentLinks[amount] || PAYMENT_CONFIG.stripe.paymentLinks[250];
+            window.open(paymentLink, '_blank');
+        }
+
+        // Enhanced amount selection with Stripe integration
+        function selectAmountWithStripe(amount) {
+            selectAmount(amount);
+            // Auto-redirect to Stripe after selection (optional)
+            setTimeout(() => {
+                const paymentLink = PAYMENT_CONFIG.stripe.paymentLinks[amount];
+                if (paymentLink && confirm(`Proceed to donate $${amount} via Stripe?`)) {
+                    window.open(paymentLink, '_blank');
+                }
+            }, 1000);
         }
 
         // Smooth scrolling
