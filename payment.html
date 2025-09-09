@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment - AI for Everyone</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .payment-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .payment-form {
+            margin-bottom: 20px;
+        }
+
+        .amount-section {
+            margin-bottom: 30px;
+        }
+
+        .amount-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .amount-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quick-amount {
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .quick-amount:hover {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        #card-element {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #card-element.StripeElement--focus {
+            border-color: #667eea;
+        }
+
+        #card-errors {
+            color: #e53e3e;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .donate-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .donate-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .donate-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #f0fff4;
+            border: 2px solid #68d391;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #fed7d7;
+            border: 2px solid #fc8181;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .security-info {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .payment-container {
+                padding: 30px 20px;
+            }
+
+            .quick-amounts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="logo">🧠</div>
+        <h1>Secure Donation</h1>
+
+        <form id="payment-form" class="payment-form">
+            <div class="amount-section">
+                <input 
+                    type="number" 
+                    id="amount-input" 
+                    class="amount-input" 
+                    placeholder="$50.00" 
+                    min="1" 
+                    max="10000" 
+                    step="0.01"
+                    required
+                >
+                <div class="quick-amounts">
+                    <button type="button" class="quick-amount" onclick="setAmount(25)">$25</button>
+                    <button type="button" class="quick-amount" onclick="setAmount(50)">$50</button>
+                    <button type="button" class="quick-amount" onclick="setAmount(100)">$100</button>
+                    <button type="button" class="quick-amount" onclick="setAmount(250)">$250</button>
+                </div>
+            </div>
+
+            <div id="card-element">
+                <!-- Stripe card element will be inserted here -->
+            </div>
+            <div id="card-errors" role="alert"></div>
+
+            <button type="submit" id="donate-button" class="donate-button">
+                🚀 Complete Donation
+            </button>
+        </form>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Processing your donation...</p>
+        </div>
+
+        <div id="success-message" class="success-message">
+            <h3>🎉 Thank you for your donation!</h3>
+            <p>Your support helps democratize AI for everyone.</p>
+        </div>
+
+        <div id="error-message" class="error-message">
+            <h3>❌ Payment Failed</h3>
+            <p id="error-text"></p>
+        </div>
+
+        <div class="security-info">
+            🔒 Payments secured by Stripe. Your card information is never stored on our servers.
+        </div>
+
+        <a href="/" class="back-link">← Back to Main Site</a>
+    </div>
+
+    <script>
+        // Initialize Stripe
+        let stripe, elements, card;
+        let stripeConfig = null;
+
+        // Get Stripe configuration from backend
+        async function initializeStripe() {
+            try {
+                const response = await fetch('/api/stripe-config');
+                stripeConfig = await response.json();
+                
+                stripe = Stripe(stripeConfig.publishableKey);
+                elements = stripe.elements();
+
+                // Create card element
+                card = elements.create('card', {
+                    style: {
+                        base: {
+                            fontSize: '16px',
+                            color: '#424770',
+                            '::placeholder': {
+                                color: '#aab7c4',
+                            },
+                        },
+                    },
+                });
+
+                card.mount('#card-element');
+
+                // Handle card errors
+                card.on('change', ({error}) => {
+                    const displayError = document.getElementById('card-errors');
+                    if (error) {
+                        displayError.textContent = error.message;
+                    } else {
+                        displayError.textContent = '';
+                    }
+                });
+
+                console.log('✅ Stripe initialized successfully');
+            } catch (error) {
+                console.error('❌ Failed to initialize Stripe:', error);
+                showError('Failed to load payment system. Please refresh the page.');
+            }
+        }
+
+        // Set amount from quick buttons
+        function setAmount(amount) {
+            document.getElementById('amount-input').value = amount;
+        }
+
+        // Handle form submission
+        document.getElementById('payment-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            if (!stripe || !card) {
+                showError('Payment system not ready. Please refresh the page.');
+                return;
+            }
+
+            const amountInput = document.getElementById('amount-input');
+            const amount = parseFloat(amountInput.value);
+
+            // Validate amount
+            if (!amount || amount < 1 || amount > 10000) {
+                showError('Please enter a valid amount between $1 and $10,000');
+                return;
+            }
+
+            setLoading(true);
+
+            try {
+                // Create payment intent
+                const response = await fetch('/api/create-payment-intent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        amount: Math.round(amount * 100), // Convert to cents
+                        currency: 'usd',
+                        metadata: {
+                            source: 'payment_page',
+                            amount_display: `$${amount.toFixed(2)}`
+                        }
+                    }),
+                });
+
+                const { clientSecret, paymentIntentId } = await response.json();
+
+                if (!clientSecret) {
+                    throw new Error('Failed to create payment intent');
+                }
+
+                // Confirm payment with Stripe
+                const {error, paymentIntent} = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: card,
+                        billing_details: {
+                            name: 'AI for Everyone Supporter',
+                        },
+                    }
+                });
+
+                setLoading(false);
+
+                if (error) {
+                    showError(error.message);
+                } else if (paymentIntent.status === 'succeeded') {
+                    showSuccess();
+                    
+                    // Reset form
+                    document.getElementById('payment-form').reset();
+                    card.clear();
+
+                    // Redirect after success
+                    setTimeout(() => {
+                        window.location.href = '/?success=true';
+                    }, 3000);
+                }
+            } catch (error) {
+                setLoading(false);
+                console.error('Payment error:', error);
+                showError('Payment failed. Please try again.');
+            }
+        });
+
+        // UI Helper functions
+        function setLoading(loading) {
+            const button = document.getElementById('donate-button');
+            const loadingDiv = document.getElementById('loading');
+            const form = document.getElementById('payment-form');
+
+            button.disabled = loading;
+            loadingDiv.style.display = loading ? 'block' : 'none';
+            form.style.opacity = loading ? '0.6' : '1';
+
+            if (loading) {
+                button.textContent = 'Processing...';
+            } else {
+                button.textContent = '🚀 Complete Donation';
+            }
+        }
+
+        function showSuccess() {
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+        }
+
+        function showError(message) {
+            document.getElementById('error-text').textContent = message;
+            document.getElementById('error-message').style.display = 'block';
+            document.getElementById('success-message').style.display = 'none';
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeStripe();
+            
+            // Set default amount if provided in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const defaultAmount = urlParams.get('amount');
+            if (defaultAmount) {
+                document.getElementById('amount-input').value = defaultAmount;
+            }
+        });
+    </script>
+</body>
+</html>

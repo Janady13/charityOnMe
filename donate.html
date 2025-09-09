@@ -378,20 +378,8 @@
     </div>
 
     <script>
-        // Payment Configuration
+        // Payment Configuration - Updated for backend integration
         const PAYMENT_CONFIG = {
-            stripe: {
-                paymentLinks: {
-                    1: 'https://buy.stripe.com/test_4gw6pn6hxgJHbhK8wz',
-                    5: 'https://buy.stripe.com/test_7sI15b3b6cpt1UM2af',
-                    10: 'https://buy.stripe.com/test_6oE4hf4fb1OH5a0fZ2',
-                    20: 'https://buy.stripe.com/test_9sMeWP2aa9dl5a03cf',
-                    50: 'https://buy.stripe.com/bII5kF1Ty3SR7rW3QF',
-                    100: 'https://buy.stripe.com/fZe28t3b61KJeCacMQ',
-                    250: 'https://buy.stripe.com/eVa6oJbtJ31R3fqfQS',
-                    500: 'https://buy.stripe.com/eVa3cxbOIFYcL9mdQV'
-                }
-            },
             venmo: {
                 username: 'thatdeveloperguyyyy'
             },
@@ -464,12 +452,9 @@
             // Show success modal first
             showSuccessModal();
             
-            // Then redirect to payment after a delay
+            // Redirect to secure payment page
             setTimeout(() => {
-                const paymentLink = PAYMENT_CONFIG.stripe.paymentLinks[selectedAmount];
-                if (paymentLink) {
-                    window.open(paymentLink, '_blank');
-                }
+                window.location.href = `/payment.html?amount=${selectedAmount}`;
             }, 1500);
         }
 
