@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support AI for Everyone - Quick Donation</title>
-    <meta name="description" content="Help democratize AI with a quick donation. Every dollar helps build autonomous AI systems for humanity.">
-    
-    <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="Support AI for Everyone">
-    <meta property="og:description" content="Help democratize AI. Quick $1-20 donations to support autonomous AI development.">
-    <meta property="og:type" content="website">
-    
+    <title>Support AI for Everyone - Free AI Charity</title>
     <style>
         * {
             margin: 0;
@@ -19,30 +12,30 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             padding: 20px;
-            color: #1a202c;
         }
 
         .container {
-            background: white;
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
             padding: 40px;
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.5s ease;
+            animation: fadeIn 0.6s ease-out;
         }
 
-        @keyframes slideUp {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -51,118 +44,136 @@
         }
 
         .logo {
+            font-size: 48px;
             text-align: center;
-            font-size: 3rem;
             margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
         }
 
         h1 {
+            color: #333;
             text-align: center;
-            font-size: 1.8rem;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 32px;
         }
 
-        .subtitle {
+        .tagline {
+            color: #666;
             text-align: center;
-            color: #718096;
             margin-bottom: 30px;
-            font-size: 1rem;
+            font-size: 18px;
         }
 
-        .amount-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .amount-btn {
-            padding: 25px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            background: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #2d3748;
-        }
-
-        .amount-btn:hover {
-            border-color: #667eea;
+        .mission {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
         }
 
         .payment-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #e2e8f0;
+            margin-bottom: 30px;
         }
 
-        .payment-title {
-            font-size: 0.9rem;
-            color: #718096;
+        .section-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
             text-align: center;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .payment-buttons {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .payment-button {
+            display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .payment-method {
-            padding: 12px 20px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
+            padding: 18px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 18px;
             font-weight: 600;
-            font-size: 0.95rem;
             transition: all 0.3s ease;
-            color: white;
-            flex: 1;
-            min-width: 120px;
-            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .stripe {
-            background: linear-gradient(135deg, #635bff 0%, #4239c3 100%);
-        }
-
-        .venmo {
-            background: linear-gradient(135deg, #3D95CE 0%, #2775a9 100%);
-        }
-
-        .cashapp {
-            background: linear-gradient(135deg, #00D632 0%, #00b82c 100%);
-        }
-
-        .payment-method:hover {
+        .payment-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .payment-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+
+        .payment-button:hover::before {
+            left: 100%;
+        }
+
+        .stripe-button {
+            background: linear-gradient(135deg, #6772e5 0%, #4a56d2 100%);
+            color: white;
+        }
+
+        .venmo-button {
+            background: linear-gradient(135deg, #3396d4 0%, #2680c2 100%);
+            color: white;
+        }
+
+        .cashapp-button {
+            background: linear-gradient(135deg, #00d632 0%, #00a827 100%);
+            color: white;
+        }
+
+        .payment-icon {
+            margin-right: 10px;
+            font-size: 24px;
         }
 
         .divider {
             text-align: center;
-            margin: 25px 0;
-            color: #a0aec0;
-            font-size: 0.9rem;
+            margin: 20px 0;
+            color: #999;
             position: relative;
         }
 
@@ -171,9 +182,9 @@
             content: '';
             position: absolute;
             top: 50%;
-            width: 40%;
+            width: 45%;
             height: 1px;
-            background: #e2e8f0;
+            background: #ddd;
         }
 
         .divider::before {
@@ -184,138 +195,93 @@
             right: 0;
         }
 
-        .main-site-link {
-            display: block;
-            text-align: center;
-            padding: 15px;
-            background: linear-gradient(135deg, #f6f6f7 0%, #e9ecef 100%);
+        .info-section {
+            background: #f8f9fa;
+            padding: 20px;
             border-radius: 12px;
-            text-decoration: none;
-            color: #4a5568;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
-        .main-site-link:hover {
-            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
-            transform: translateY(-2px);
-        }
-
-        .progress-bar {
-            background: #e2e8f0;
-            border-radius: 10px;
-            height: 8px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            height: 100%;
-            width: 73%;
-            border-radius: 10px;
-            animation: progressAnimation 2s ease;
-        }
-
-        @keyframes progressAnimation {
-            from { width: 0; }
-            to { width: 73%; }
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
-
-        .stat {
-            color: #718096;
-        }
-
-        .stat strong {
-            color: #2d3748;
-        }
-
-        .message {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-            color: #4a5568;
-        }
-
-        #selectedAmount {
-            display: none;
-            text-align: center;
-            margin: 10px 0;
-            padding: 10px;
-            background: #f0fff4;
-            border-radius: 8px;
-            color: #22543d;
-            font-weight: 600;
-        }
-
-        .share-section {
-            margin-top: 20px;
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .share-text {
-            font-size: 0.85rem;
-            color: #a0aec0;
+        .info-title {
+            font-size: 18px;
+            color: #333;
             margin-bottom: 10px;
         }
 
-        .share-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
+        .info-text {
+            color: #666;
+            line-height: 1.6;
         }
 
-        .share-btn {
-            padding: 8px 15px;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
-            background: white;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #667eea;
             text-decoration: none;
-            color: #4a5568;
         }
 
-        .share-btn:hover {
-            background: #f7fafc;
-            border-color: #667eea;
+        .footer a:hover {
+            text-decoration: underline;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
             .container {
                 padding: 30px 20px;
             }
 
             h1 {
-                font-size: 1.5rem;
+                font-size: 28px;
             }
 
-            .amount-btn {
-                padding: 20px;
-                font-size: 1.3rem;
-            }
-
-            .payment-buttons {
+            .stats {
                 flex-direction: column;
+                gap: 15px;
             }
+        }
 
-            .payment-method {
-                width: 100%;
-            }
+        .amount-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .amount-button {
+            padding: 12px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .amount-button:hover,
+        .amount-button.selected {
+            background: #667eea;
+            color: white;
+        }
+
+        .custom-amount {
+            grid-column: span 3;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .custom-amount:focus {
+            outline: none;
+            border-color: #764ba2;
         }
     </style>
 </head>
@@ -323,264 +289,111 @@
     <div class="container">
         <div class="logo">🧠</div>
         <h1>Support AI for Everyone</h1>
-        <p class="subtitle">Help democratize autonomous AI</p>
+        <p class="tagline">Help democratize autonomous AI</p>
 
-        <div class="message">
+        <div class="mission">
             💡 Your contribution directly funds open-source AI development and self-healing neural systems
         </div>
 
         <div class="stats">
-            <span class="stat"><strong>5,247</strong> supporters</span>
-            <span class="stat"><strong>$48,392</strong> raised</span>
+            <div class="stat">
+                <div class="stat-number">5,247</div>
+                <div class="stat-label">supporters</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">$48,392</div>
+                <div class="stat-label">raised</div>
+            </div>
         </div>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-
-        <p class="payment-title">Choose Amount</p>
-        <div class="amount-grid">
-            <button class="amount-btn" onclick="selectAmount(1)">$1</button>
-            <button class="amount-btn" onclick="selectAmount(5)">$5</button>
-            <button class="amount-btn" onclick="selectAmount(10)">$10</button>
-            <button class="amount-btn" onclick="selectAmount(20)">$20</button>
-        </div>
-
-        <div id="selectedAmount"></div>
 
         <div class="payment-section">
-            <p class="payment-title">Select Payment Method</p>
+            <h2 class="section-title">Choose Your Donation Method</h2>
+            
             <div class="payment-buttons">
-                <button class="payment-method stripe" onclick="processStripePayment()">
-                    Card 💳
-                </button>
-                <button class="payment-method venmo" onclick="processVenmoPayment()">
-                    Venmo
-                </button>
-                <button class="payment-method cashapp" onclick="processCashAppPayment()">
-                    Cash App
-                </button>
+                <a href="https://buy.stripe.com/8x2eVfeFVcpnaD0eoT2Nq0d" class="payment-button stripe-button" target="_blank">
+                    <span class="payment-icon">💳</span>
+                    Donate with Card (Stripe)
+                </a>
+
+                <a href="https://venmo.com/u/thatdeveloperguyyyy" class="payment-button venmo-button" target="_blank">
+                    <span class="payment-icon">📱</span>
+                    Donate with Venmo
+                </a>
+
+                <a href="https://cash.app/$Janady07" class="payment-button cashapp-button" target="_blank">
+                    <span class="payment-icon">💸</span>
+                    Donate with CashApp
+                </a>
             </div>
         </div>
 
-        <div class="divider">or</div>
+        <div class="info-section">
+            <h3 class="info-title">🌟 What Your Donation Supports</h3>
+            <p class="info-text">
+                Every dollar contributes to developing free, open-source AI tools that empower individuals 
+                and communities worldwide. We're building self-healing neural networks and autonomous systems 
+                that will be accessible to everyone, regardless of their economic background.
+            </p>
+        </div>
 
-        <a href="index.html" class="main-site-link">
-            🚀 Learn More & Larger Donations →
-        </a>
+        <div class="info-section">
+            <h3 class="info-title">🔒 Secure & Transparent</h3>
+            <p class="info-text">
+                All donations are processed securely through Stripe, Venmo, or CashApp. 
+                As a registered charity, we provide full transparency on how funds are used 
+                to advance AI accessibility and education.
+            </p>
+        </div>
 
-        <div class="share-section">
-            <p class="share-text">Share with your network</p>
-            <div class="share-buttons">
-                <a href="#" onclick="shareOnTwitter()" class="share-btn">Twitter/X</a>
-                <a href="#" onclick="copyLink()" class="share-btn">Copy Link</a>
-            </div>
+        <div class="footer">
+            <p>Free AI Charity is a 501(c)(3) nonprofit organization</p>
+            <p>Tax ID: Coming Soon | <a href="/">Back to Home</a></p>
+            <p>&copy; 2025 Free AI Charity. All rights reserved.</p>
         </div>
     </div>
 
     <script>
-        // Payment Configuration
-        const PAYMENT_CONFIG = {
-            stripe: {
-                paymentLinks: {
-                    1: 'https://buy.stripe.com/test_4gw6pn6hxgJHbhK8wz',
-                    5: 'https://buy.stripe.com/test_7sI15b3b6cpt1UM2af',
-                    10: 'https://buy.stripe.com/test_6oE4hf4fb1OH5a0fZ2',
-                    20: 'https://buy.stripe.com/test_9sMeWP2aa9dl5a03cf',
-                    50: 'https://buy.stripe.com/bII5kF1Ty3SR7rW3QF',
-                    100: 'https://buy.stripe.com/fZe28t3b61KJeCacMQ',
-                    250: 'https://buy.stripe.com/eVa6oJbtJ31R3fqfQS',
-                    500: 'https://buy.stripe.com/eVa3cxbOIFYcL9mdQV'
-                }
-            },
-            venmo: {
-                username: 'thatdeveloperguyyyy'
-            },
-            cashapp: {
-                cashtag: 'Janady07'
-            }
-        };
-
-        let selectedAmount = null;
-        let currentAccessCode = null;
-
-        function selectAmount(amount) {
-            selectedAmount = amount;
-            const display = document.getElementById('selectedAmount');
-            display.style.display = 'block';
-            display.innerHTML = `✅ Selected: <strong>$${amount}</strong> - Choose payment method below`;
-            
-            // Highlight selected button
-            document.querySelectorAll('.amount-btn').forEach(btn => {
-                if (btn.textContent === `$${amount}`) {
-                    btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                    btn.style.color = 'white';
-                    btn.style.borderColor = '#667eea';
-                } else {
-                    btn.style.background = 'white';
-                    btn.style.color = '#2d3748';
-                    btn.style.borderColor = '#e2e8f0';
-                }
+        // Add some interactive animations
+        document.querySelectorAll('.payment-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.02)';
             });
-
-            // Smooth scroll to payment section
-            document.querySelector('.payment-section').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'nearest' 
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
             });
-        }
-
-        function generateAccessCode() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let code = 'AI-';
-            for (let i = 0; i < 12; i++) {
-                if (i === 4 || i === 8) code += '-';
-                else code += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return code;
-        }
-
-        function showSuccessModal() {
-            currentAccessCode = generateAccessCode();
-            
-            // Store access code with timestamp
-            const accessData = {
-                code: currentAccessCode,
-                amount: selectedAmount,
-                timestamp: new Date().toISOString(),
-                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
-            };
-            localStorage.setItem('aiAgentAccess', JSON.stringify(accessData));
-
-            // Show success message
-            alert(`Thank you for supporting AI for everyone! 🚀\n\nYour AI Optimization Code: ${currentAccessCode}\n\nThis code gives you 1 hour of premium AI optimization.\nRedirecting to payment...`);
-        }
-
-        function processStripePayment() {
-            if (!selectedAmount) {
-                alert('Please select an amount first');
-                return;
-            }
-            
-            // Show success modal first
-            showSuccessModal();
-            
-            // Then redirect to payment after a delay
-            setTimeout(() => {
-                const paymentLink = PAYMENT_CONFIG.stripe.paymentLinks[selectedAmount];
-                if (paymentLink) {
-                    window.open(paymentLink, '_blank');
-                }
-            }, 1500);
-        }
-
-        function processVenmoPayment() {
-            if (!selectedAmount) {
-                alert('Please select an amount first');
-                return;
-            }
-
-            // Show success modal first
-            showSuccessModal();
-
-            setTimeout(() => {
-                const venmoUsername = PAYMENT_CONFIG.venmo.username;
-                const venmoUrl = `venmo://paycharge?txn=pay&recipients=${venmoUsername}&amount=${selectedAmount}&note=AI%20for%20Everyone%20-%20Code%3A%20${currentAccessCode}`;
-                const webUrl = `https://venmo.com/${venmoUsername}?txn=pay&amount=${selectedAmount}&note=AI%20for%20Everyone%20-%20Code%3A%20${currentAccessCode}`;
-                
-                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                
-                if (isMobile) {
-                    window.location.href = venmoUrl;
-                    setTimeout(() => {
-                        window.open(webUrl, '_blank');
-                    }, 2500);
-                } else {
-                    window.open(webUrl, '_blank');
-                }
-            }, 1500);
-        }
-
-        function processCashAppPayment() {
-            if (!selectedAmount) {
-                alert('Please select an amount first');
-                return;
-            }
-
-            // Show success modal first
-            showSuccessModal();
-
-            setTimeout(() => {
-                const cashtag = PAYMENT_CONFIG.cashapp.cashtag;
-                const cashAppUrl = `https://cash.app/${cashtag}/${selectedAmount}`;
-                window.open(cashAppUrl, '_blank');
-            }, 1500);
-        }
-
-        function shareOnTwitter() {
-            const text = "I'm supporting AI democratization! Help build autonomous AI systems for everyone 🧠🚀 Get 1 hour FREE AI optimization with any donation!";
-            const url = window.location.href;
-            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-            window.open(twitterUrl, '_blank');
-        }
-
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                const btn = event.target;
-                const originalText = btn.textContent;
-                btn.textContent = '✅ Copied!';
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 2000);
-            });
-        }
-
-        // Add some dynamic feel
-        window.addEventListener('load', () => {
-            // Check for existing access code
-            const savedAccess = localStorage.getItem('aiAgentAccess');
-            if (savedAccess) {
-                const accessData = JSON.parse(savedAccess);
-                const expiresAt = new Date(accessData.expiresAt);
-                const now = new Date();
-                
-                if (now < expiresAt) {
-                    console.log('Active AI Agent access found:', accessData.code);
-                }
-            }
-            
-            // Animate counter
-            const statsElement = document.querySelector('.stats');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateValue('supporters', 0, 5247, 2000);
-                        animateValue('raised', 0, 48392, 2000);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
-            observer.observe(statsElement);
         });
 
-        function animateValue(id, start, end, duration) {
-            const elements = document.querySelectorAll('.stat strong');
-            if (!elements.length) return;
-            
-            let current = start;
-            const increment = (end - start) / (duration / 10);
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= end) {
-                    current = end;
-                    clearInterval(timer);
+        // Animate stats on page load
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
                 }
-                
-                if (id === 'raised') {
-                    elements[1].textContent = '$' + Math.floor(current).toLocaleString();
-                } else {
-                    elements[0].textContent = Math.floor(current).toLocaleString();
-                }
-            }, 10);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Animate the supporter count
+        const supporterCount = document.querySelector('.stat-number');
+        if (supporterCount && supporterCount.textContent === '5,247') {
+            animateValue(supporterCount, 0, 5247, 2000);
+        }
+
+        // Animate the raised amount
+        const raisedAmount = document.querySelectorAll('.stat-number')[1];
+        if (raisedAmount) {
+            raisedAmount.innerHTML = '$0';
+            setTimeout(() => {
+                animateValue(raisedAmount, 0, 48392, 2000);
+                setTimeout(() => {
+                    raisedAmount.innerHTML = '$48,392';
+                }, 2000);
+            }, 500);
         }
     </script>
 </body>
