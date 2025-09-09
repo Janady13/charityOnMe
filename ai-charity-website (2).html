@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Everyone - Democratizing Autonomous Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --neural: #10b981;
+            --light: #ffffff;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            --neural-gradient: linear-gradient(135deg, #10b981 0%, #6366f1 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(99, 102, 241, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-brain {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% { 
+                transform: scale(1.05);
+                filter: brightness(1.2);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .support-nav-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .support-nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #e0e7ff 0%, #fae8ff 50%, #ddd6fe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neural-network {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--primary) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--secondary) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, var(--accent) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(20px) rotate(-1deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Impact Counter */
+        .impact {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .impact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .impact-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .impact-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .impact-label {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        /* Programs Section */
+        .programs {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .programs-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.05);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .program-icon {
+            padding: 2rem;
+            background: var(--gradient);
+            text-align: center;
+            font-size: 3rem;
+        }
+
+        .program-content {
+            padding: 2rem;
+        }
+
+        .program-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .program-description {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* AI Assistant Chat */
+        .ai-chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .ai-chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        .ai-chat-button::after {
+            content: '🤖';
+            font-size: 1.5rem;
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 998;
+            animation: slideUp 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-widget.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-chat:hover {
+            transform: rotate(90deg);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .bot-message {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%);
+            align-self: flex-start;
+        }
+
+        .user-message {
+            background: var(--gradient);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+        }
+
+        .send-button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+        }
+
+        .quick-actions {
+            padding: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-action {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 100%);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Support Section */
+        .donation {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .donation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .donation-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .donation-amount {
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            background: white;
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .donation-amount:hover,
+        .donation-amount.selected {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .custom-amount {
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            width: 150px;
+            text-align: center;
+        }
+
+        .donation-frequency {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .frequency-option {
+            padding: 0.75rem 1.5rem;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .frequency-option.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .chat-widget {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .impact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Loading dots animation */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 10px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-brain">🧠</span>
+                AI for Everyone
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#initiatives">Initiatives</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#collaborate">Collaborate</a></li>
+                <li><a href="#support" class="support-nav-btn">Support AI Development</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="neural-network"></div>
+        <div class="hero-content">
+            <h1>Democratizing Autonomous Intelligence</h1>
+            <p class="hero-subtitle">
+                Supporting the development of self-healing AI systems and making 
+                advanced autonomous intelligence accessible to everyone, everywhere.
+            </p>
+            <div class="hero-buttons">
+                <a href="#support" class="btn btn-primary">
+                    <span>🚀</span> Support the Project
+                </a>
+                <a href="#initiatives" class="btn btn-secondary">
+                    Explore Our Initiatives
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact">
+        <div class="impact-container">
+            <h2 class="section-title">Advancing AI Together</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-number" data-count="10000">0</div>
+                    <div class="impact-label">AI Models Deployed</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number" data-count="50">0</div>
+                    <div class="impact-label">Research Papers Published</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number" data-count="5000">0</div>
+                    <div class="impact-label">Developers Supported</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number" data-count="100">0%</div>
+                    <div class="impact-label">Open Source</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs" id="initiatives">
+        <div class="programs-container">
+            <h2 class="section-title">Our AI Initiatives</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">🧠</div>
+                    <div class="program-content">
+                        <h3 class="program-title">Self-Healing AI Brain</h3>
+                        <p class="program-description">
+                            Developing autonomous neural architectures that can adapt, repair, 
+                            and evolve without human intervention, creating truly resilient AI systems.
+                        </p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🌐</div>
+                    <div class="program-content">
+                        <h3 class="program-title">Global AI Access</h3>
+                        <p class="program-description">
+                            Providing free AI tools and resources to underserved communities, 
+                            ensuring everyone can benefit from artificial intelligence advances.
+                        </p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🔬</div>
+                    <div class="program-content">
+                        <h3 class="program-title">Open Research Labs</h3>
+                        <p class="program-description">
+                            Funding independent AI research with full transparency and open-source 
+                            publication of all findings and models.
+                        </p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🎓</div>
+                    <div class="program-content">
+                        <h3 class="program-title">AI Education Platform</h3>
+                        <p class="program-description">
+                            Free courses and certifications in AI development, machine learning, 
+                            and autonomous systems for learners worldwide.
+                        </p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">⚡</div>
+                    <div class="program-content">
+                        <h3 class="program-title">Compute Resources</h3>
+                        <p class="program-description">
+                            Distributed computing network providing free GPU access for AI training 
+                            and experimentation to independent researchers.
+                        </p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">🤝</div>
+                    <div class="program-content">
+                        <h3 class="program-title">Developer Grants</h3>
+                        <p class="program-description">
+                            Financial support for innovative AI projects that contribute to the 
+                            autonomous intelligence ecosystem.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="donation" id="support">
+        <div class="donation-container">
+            <h2 class="section-title">Support Autonomous AI Development</h2>
+            <p style="color: var(--gray); margin-bottom: 2rem;">
+                Your contribution accelerates the development of self-healing AI systems and democratizes access to advanced intelligence.
+            </p>
+            
+            <div class="donation-frequency">
+                <button class="frequency-option active" onclick="setFrequency('once')">One Time</button>
+                <button class="frequency-option" onclick="setFrequency('monthly')">Monthly</button>
+                <button class="frequency-option" onclick="setFrequency('yearly')">Yearly</button>
+            </div>
+            
+            <div class="donation-options">
+                <button class="donation-amount" onclick="selectAmount(50)">$50</button>
+                <button class="donation-amount" onclick="selectAmount(100)">$100</button>
+                <button class="donation-amount selected" onclick="selectAmount(250)">$250</button>
+                <button class="donation-amount" onclick="selectAmount(500)">$500</button>
+                <input type="number" class="custom-amount" placeholder="Other" id="customAmount">
+            </div>
+            
+            <button class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 3rem;">
+                Support Now 🚀
+            </button>
+            
+            <p style="margin-top: 2rem; color: var(--gray); font-size: 0.9rem;">
+                🔒 Secure donation powered by blockchain technology. We are a registered 501(c)(3) nonprofit advancing AI for humanity.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <a href="#">Our Mission</a>
+                <a href="#">Research Papers</a>
+                <a href="#">Open Source Projects</a>
+                <a href="#">Team & Advisors</a>
+            </div>
+            <div class="footer-section">
+                <h3>Get Involved</h3>
+                <a href="#">Contribute Code</a>
+                <a href="#">Join Research</a>
+                <a href="#">Compute Donation</a>
+                <a href="#">Partnership Program</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="#">Documentation</a>
+                <a href="#">AI Ethics Framework</a>
+                <a href="#">Developer Portal</a>
+                <a href="#">Research Blog</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <a href="#">GitHub</a>
+                <a href="#">Discord Community</a>
+                <a href="#">Twitter/X</a>
+                <a href="#">Contact Research Team</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AI for Everyone Foundation. Advancing autonomous intelligence for humanity. | Tax ID: 12-3456789</p>
+        </div>
+    </footer>
+
+    <!-- AI Chat Assistant -->
+    <div class="ai-chat-button" onclick="toggleChat()"></div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <div class="chat-title">🤖 AI Assistant</div>
+            <button class="close-chat" onclick="toggleChat()">×</button>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                Hello! I'm an AI assistant here to help you learn about our autonomous intelligence initiatives. How can I assist you today?
+            </div>
+        </div>
+        
+        <div class="quick-actions">
+            <button class="quick-action" onclick="sendQuickMessage('What is self-healing AI?')">Self-Healing AI</button>
+            <button class="quick-action" onclick="sendQuickMessage('How can I contribute?')">Contribute</button>
+            <button class="quick-action" onclick="sendQuickMessage('Research access')">Research</button>
+            <button class="quick-action" onclick="sendQuickMessage('Get compute resources')">Resources</button>
+        </div>
+        
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ask about AI development..." onkeypress="handleKeyPress(event)">
+            <button class="send-button" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.impact-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const isPercentage = counter.getAttribute('data-count').includes('%');
+                let count = 0;
+                
+                const updateCount = () => {
+                    const increment = target / speed;
+                    
+                    if (count < target) {
+                        count = Math.ceil(count + increment);
+                        counter.textContent = count.toLocaleString() + (isPercentage ? '%' : '');
+                        setTimeout(updateCount, 10);
+                    } else {
+                        counter.textContent = target.toLocaleString() + (isPercentage ? '%' : '');
+                    }
+                };
+                
+                updateCount();
+            });
+        }
+
+        // Intersection Observer for counter animation
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const impactSection = document.querySelector('.impact');
+        if (impactSection) {
+            observer.observe(impactSection);
+        }
+
+        // Chat functionality
+        let chatOpen = false;
+
+        function toggleChat() {
+            const chatWidget = document.getElementById('chatWidget');
+            chatOpen = !chatOpen;
+            chatWidget.classList.toggle('active');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                
+                // Show typing indicator
+                showTyping();
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    removeTyping();
+                    const response = getAIResponse(message);
+                    addMessage(response, 'bot');
+                }, 1000);
+            }
+        }
+
+        function sendQuickMessage(message) {
+            addMessage(message, 'user');
+            showTyping();
+            
+            setTimeout(() => {
+                removeTyping();
+                const response = getAIResponse(message);
+                addMessage(response, 'bot');
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTyping() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot-message typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function removeTyping() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function getAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // AI-focused response logic
+            if (lowerMessage.includes('self-healing') || lowerMessage.includes('autonomous')) {
+                return "Our self-healing AI brain project focuses on creating neural architectures that can autonomously detect, diagnose, and repair their own issues. This includes adaptive learning algorithms, error correction mechanisms, and evolutionary optimization. The system continuously monitors its performance and makes real-time adjustments without human intervention!";
+            } else if (lowerMessage.includes('contribute') || lowerMessage.includes('help')) {
+                return "You can contribute in several ways: 1) Support us financially to fund research and compute resources, 2) Contribute code to our open-source repositories on GitHub, 3) Join our research community on Discord, 4) Donate unused compute resources, or 5) Help spread awareness about democratizing AI. Every contribution accelerates our mission!";
+            } else if (lowerMessage.includes('research') || lowerMessage.includes('papers')) {
+                return "All our research is open-access! We've published 50+ papers on autonomous systems, neural architecture search, and self-healing algorithms. You can access our research portal for free, join our weekly research seminars, or apply for collaboration opportunities. We believe in transparent, reproducible AI research for everyone.";
+            } else if (lowerMessage.includes('compute') || lowerMessage.includes('resources') || lowerMessage.includes('gpu')) {
+                return "We provide free GPU compute resources for AI researchers and developers! Apply for access through our developer portal. We offer up to 100 hours/month of A100 GPU time for qualifying projects. We also accept compute donations - if you have idle GPUs, you can contribute them to our distributed network!";
+            } else if (lowerMessage.includes('education') || lowerMessage.includes('learn')) {
+                return "Our AI Education Platform offers free courses from basics to advanced topics: Introduction to Neural Networks, Deep Learning, Autonomous Systems Design, and our flagship course on Building Self-Healing AI. All courses include hands-on labs with free compute resources. Get certified and join our community of 5000+ AI developers!";
+            } else if (lowerMessage.includes('donate') || lowerMessage.includes('support')) {
+                return "Your support directly funds: AI research ($50 = 10 hours of compute), open-source development ($100 = 1 week of developer time), education programs ($250 = full course scholarship), and infrastructure ($500 = 1 month of model hosting). All donations are tax-deductible and 100% goes to advancing AI for humanity!";
+            } else if (lowerMessage.includes('open source') || lowerMessage.includes('github')) {
+                return "Everything we build is 100% open source! Check out our GitHub organization for repositories including the Self-Healing Brain framework, distributed training tools, and our AI education platform. We use MIT and Apache 2.0 licenses to ensure maximum accessibility. Join 1000+ contributors working on cutting-edge AI!";
+            } else {
+                return "I'm here to help you understand our autonomous AI initiatives! You can ask me about our self-healing AI brain project, how to contribute to open-source AI development, access research papers, get free compute resources, or learn about AI through our education platform. What interests you most?";
+            }
+        }
+
+        // Support functionality
+        let selectedAmount = 250;
+        let frequency = 'once';
+
+        function selectAmount(amount) {
+            selectedAmount = amount;
+            document.querySelectorAll('.donation-amount').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            document.getElementById('customAmount').value = '';
+        }
+
+        function setFrequency(freq) {
+            frequency = freq;
+            document.querySelectorAll('.frequency-option').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
