@@ -1,0 +1,12 @@
+[build]
+  command = ""
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/donate"
+  to = "/donate.html"
+  status = 200
