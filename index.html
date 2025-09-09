@@ -1087,35 +1087,40 @@
             event.target.classList.add('active');
         }
 
-        // Payment Configuration
-        const PAYMENT_CONFIG = {
-            stripe: {
-                paymentLinks: {
-                    50: 'https://buy.stripe.com/bII5kF1Ty3SR7rW3QF',
-                    100: 'https://buy.stripe.com/fZe28t3b61KJeCacMQ',
-                    250: 'https://buy.stripe.com/eVa6oJbtJ31R3fqfQS',
-                    500: 'https://buy.stripe.com/eVa3cxbOIFYcL9mdQV'
-                }
-            }
-        };
-
+        // Enhanced payment processing with backend integration
         function processMainDonation() {
             const amount = selectedAmount || 250; // Default to $250 if none selected
-            const paymentLink = PAYMENT_CONFIG.stripe.paymentLinks[amount] || PAYMENT_CONFIG.stripe.paymentLinks[250];
-            window.open(paymentLink, '_blank');
+            const customAmount = document.getElementById('customAmount').value;
+            const finalAmount = customAmount || amount;
+            
+            // Redirect to secure payment page
+            window.location.href = `/payment.html?amount=${finalAmount}`;
         }
 
-        // Enhanced amount selection with Stripe integration
+        // Enhanced amount selection 
         function selectAmountWithStripe(amount) {
             selectAmount(amount);
-            // Auto-redirect to Stripe after selection (optional)
-            setTimeout(() => {
-                const paymentLink = PAYMENT_CONFIG.stripe.paymentLinks[amount];
-                if (paymentLink && confirm(`Proceed to donate $${amount} via Stripe?`)) {
-                    window.open(paymentLink, '_blank');
-                }
-            }, 1000);
+            // Show selected amount feedback
+            const customAmountInput = document.getElementById('customAmount');
+            customAmountInput.value = '';
         }
+
+        // Handle custom amount input
+        document.addEventListener('DOMContentLoaded', () => {
+            const customAmountInput = document.getElementById('customAmount');
+            if (customAmountInput) {
+                customAmountInput.addEventListener('input', (e) => {
+                    const value = parseFloat(e.target.value);
+                    if (value > 0) {
+                        selectedAmount = value;
+                        // Clear preset amount selections
+                        document.querySelectorAll('.donation-amount').forEach(btn => {
+                            btn.classList.remove('selected');
+                        });
+                    }
+                });
+            }
+        });
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
